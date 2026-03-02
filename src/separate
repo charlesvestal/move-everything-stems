@@ -1,0 +1,45 @@
+#!/bin/sh
+# SpleeterRT 3-stem separation: drums, vocals, accompaniment
+# Usage: separate-rt <input.wav> <output-dir> [threads]
+# Creates .done on success, .error on failure
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+INPUT="$1"
+OUTPUT_DIR="$2"
+THREADS="${3:-2}"
+
+if [ -z "$INPUT" ] || [ -z "$OUTPUT_DIR" ]; then
+    echo "Usage: separate-rt <input.wav> <output-dir> [threads]"
+    exit 1
+fi
+
+mkdir -p "$OUTPUT_DIR"
+
+# Lower priority so Move UI stays responsive
+renice 15 $$ >/dev/null 2>&1
+
+export LD_LIBRARY_PATH="$SCRIPT_DIR/engine:$LD_LIBRARY_PATH"
+
+# SpleeterRT uses full input filename (with ext) as output prefix
+FULLNAME=$(basename "$INPUT")
+
+# SpleeterRT writes output files to CWD, so cd to output dir
+cd "$OUTPUT_DIR"
+
+# Run SpleeterRT in 3-stem mode (drums, vocals, accompaniment)
+# Args: <threads> <timeStep> <binLimit> <stems> <audioFile>
+# timeStep=256 + binLimit=2048 = full spectrum, finer time resolution
+"$SCRIPT_DIR/engine/spleeter" "$THREADS" 256 2048 3 "$INPUT" 2>&1
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 0 ]; then
+    # Rename outputs to consistent names
+    [ -f "${FULLNAME}_Drum.wav" ]          && mv "${FULLNAME}_Drum.wav" "drums.wav"
+    [ -f "${FULLNAME}_Vocal.wav" ]         && mv "${FULLNAME}_Vocal.wav" "vocals.wav"
+    [ -f "${FULLNAME}_Accompaniment.wav" ] && mv "${FULLNAME}_Accompaniment.wav" "accompaniment.wav"
+    touch "$OUTPUT_DIR/.done"
+else
+    echo "Exit code: $EXIT_CODE" > "$OUTPUT_DIR/.error"
+fi
+
+exit $EXIT_CODE

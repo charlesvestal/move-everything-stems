@@ -1,0 +1,71 @@
+{
+  "title": "Stem Separation",
+  "children": [
+    {
+      "title": "Overview",
+      "lines": [
+        "Separate any WAV file",
+        "into individual stems:",
+        " - Drums",
+        " - Vocals",
+        " - Accompaniment",
+        "",
+        "Uses SpleeterRT engine",
+        "at ~0.5x realtime speed.",
+        "A 4-minute song takes",
+        "about 2 minutes."
+      ]
+    },
+    {
+      "title": "How to Use",
+      "lines": [
+        "1. Select a WAV file",
+        "   from the browser",
+        "2. Confirm to start",
+        "   processing",
+        "3. Wait for separation",
+        "   (progress shown)",
+        "4. Review stems with",
+        "   checkboxes to keep",
+        "5. Push Save All or",
+        "   select individual",
+        "   stems to save"
+      ]
+    },
+    {
+      "title": "Stem Review",
+      "lines": [
+        "After processing, you",
+        "see a stem checklist.",
+        "",
+        "All stems are selected",
+        "by default.",
+        "",
+        "Jog: scroll stems",
+        "Push: toggle select",
+        "Save All: keep all",
+        "Save N: keep selected",
+        "Cancel: discard all",
+        "",
+        "Output saved to:",
+        " Stems/<filename>/"
+      ]
+    },
+    {
+      "title": "Output",
+      "lines": [
+        "Stems are saved to:",
+        " UserLibrary/Stems/",
+        "  <filename>/",
+        "",
+        "Each stem is a WAV",
+        "file: drums.wav,",
+        "vocals.wav, and",
+        "accompaniment.wav",
+        "",
+        "Same format as input:",
+        "44.1kHz 16-bit stereo"
+      ]
+    }
+  ]
+}
