@@ -11,7 +11,7 @@ Separate audio files into individual stems (drums, vocals, accompaniment) direct
 
 ## Prerequisites
 
-- [Move Everything](https://github.com/charlesvestal/move-anything) installed on your Ableton Move
+- [Move Everything](https://github.com/charlesvestal/move-everything) installed on your Ableton Move
 - SSH access enabled: http://move.local/development/ssh
 
 ## Install
@@ -26,7 +26,7 @@ Separate audio files into individual stems (drums, vocals, accompaniment) direct
 ### Build from Source
 
 ```bash
-git clone https://github.com/charlesvestal/move-anything-stems
+git clone https://github.com/charlesvestal/move-everything-stems
 cd move-anything-stems
 ./scripts/build.sh
 ./scripts/install.sh
@@ -52,7 +52,7 @@ Each separation produces three WAV files:
 ## Credits
 
 - **SpleeterRT engine**: Real-time stem separation
-- **Move Everything framework**: [Charles Vestal](https://github.com/charlesvestal/move-anything)
+- **Move Everything framework**: [Charles Vestal](https://github.com/charlesvestal/move-everything)
 
 ## License
 
